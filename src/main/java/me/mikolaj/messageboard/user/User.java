@@ -2,13 +2,16 @@ package me.mikolaj.messageboard.user;
 
 import me.mikolaj.messageboard.post.Post;
 import me.mikolaj.messageboard.response.Response;
+import me.mikolaj.messageboard.security.role.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -44,10 +47,18 @@ public class User {
 	private boolean locked = false;
 
 	@OneToMany(mappedBy = "author")
-	private final List<Response> responses = new ArrayList<>();
+	private List<Response> responses = new ArrayList<>();
 
 	@OneToMany(mappedBy = "author")
-	private final List<Post> posts = new ArrayList<>();
+	private List<Post> posts = new ArrayList<>();
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "user_roles",
+			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+	)
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 	}
@@ -97,6 +108,18 @@ public class User {
 		return locked;
 	}
 
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
 	public void setId(final Long id) {
 		this.id = id;
 	}
@@ -131,5 +154,17 @@ public class User {
 
 	public void setLocked(final boolean locked) {
 		this.locked = locked;
+	}
+
+	public void setResponses(final List<Response> responses) {
+		this.responses = responses;
+	}
+
+	public void setPosts(final List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public void setRoles(final Set<Role> roles) {
+		this.roles = roles;
 	}
 }
