@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <title>Strona główna</title>
+
+    <div th:replace="fragments/header :: myHeader"></div>
+
+</head>
+<body>
+<header>
+    <div th:replace="fragments/navbar :: myNavbar"></div>
+</header>
+
+<main>
+
+</main>
+
+<footer id="footer">
+    <div th:replace="fragments/footer :: myFooter"></div>
+</footer>
+
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</body>
+</html>
