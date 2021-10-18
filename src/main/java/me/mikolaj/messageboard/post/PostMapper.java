@@ -25,6 +25,8 @@ public class PostMapper {
 		postDto.setId(post.getId());
 		postDto.setSubject(post.getSubject());
 		postDto.setContent(post.getContent());
+		postDto.setShortContent(createShortContent(post.getContent()));
+		//postDto.setShortContent("XD");
 		postDto.setCategory(post.getCategory());
 		postDto.setAddedDate(post.getAddedDate());
 		postDto.setAuthorUsername(post.getAuthor().getUsername());
@@ -49,5 +51,26 @@ public class PostMapper {
 				.collect(Collectors.toList()));
 
 		return post;
+	}
+
+	private String createShortContent(final String content) {
+		final StringBuilder shortContent = new StringBuilder();
+		if (content.split(" ").length <= 10)
+			return content;
+		else {
+			int counter = 0;
+			for (final String word : content.split(" ")) {
+				shortContent.append(word);
+
+				if (counter == 10) {
+					shortContent.append("...");
+					break;
+				}
+				shortContent.append(" ");
+
+				counter++;
+			}
+			return shortContent.toString();
+		}
 	}
 }

@@ -12,6 +12,8 @@ public class PostDto {
 	private String category;
 	private LocalDateTime addedDate;
 
+	private String shortContent;
+
 	private String authorUsername;
 
 	private List<Long> responsesIds;
@@ -38,6 +40,14 @@ public class PostDto {
 
 	public void setContent(final String content) {
 		this.content = content;
+	}
+
+	public String getShortContent() {
+		return shortContent;
+	}
+
+	public void setShortContent(final String shortContent) {
+		this.shortContent = shortContent;
 	}
 
 	public String getCategory() {

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Override
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
 				.antMatchers("/").permitAll()
-				.anyRequest().authenticated()
+				.anyRequest().permitAll()
 				.and().formLogin()
 				.loginPage("/login").failureUrl("/login-error").permitAll()
 				.and().logout().logoutSuccessUrl("/").permitAll();
