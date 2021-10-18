@@ -24,7 +24,7 @@
         <div th:each="post: ${posts}">
             <div class="card my-4 bg-secondary text-white">
                 <div class="card-header">
-                    <a th:href="@{/posty/polityka(id=${post.getId()})}">
+                    <a th:href="@{/posty/polityka/post(id=${post.getId()})}">
                         <strong th:text="${post.getSubject()}">Tytuł posta </strong>
                     </a>
                 </div>

@@ -14,3 +14,7 @@ body {
 .card-header > a:hover {
     color: cornsilk;
 }
+
+.card {
+    background-color: #212121 !important;
+}
