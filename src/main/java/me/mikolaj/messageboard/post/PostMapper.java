@@ -45,10 +45,11 @@ public class PostMapper {
 		post.setAuthor(userRepository
 				.findByUsername(postDto.getAuthorUsername())
 				.orElseThrow(UserNotFoundException::new));
-		post.setResponses(postDto.getResponsesIds()
-				.stream().map(responseRepository::findById)
-				.map(response -> response.orElseThrow(ResponseNotFoundException::new))
-				.collect(Collectors.toList()));
+		if (postDto.getResponsesIds() != null && postDto.getResponsesIds().size() > 0)
+			post.setResponses(postDto.getResponsesIds()
+					.stream().map(responseRepository::findById)
+					.map(response -> response.orElseThrow(ResponseNotFoundException::new))
+					.collect(Collectors.toList()));
 
 		return post;
 	}

@@ -2,6 +2,7 @@
 <html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         lang="en">
 <head>
     <title>Polityka</title>
@@ -20,6 +21,35 @@
 
         <h2 class="mt-5 text-center text-white">Polityka - najnowsze posty
             <i class="fas fa-landmark text-warning mx-2"></i></h2>
+
+        <div sec:authorize="isAuthenticated()">
+            <hr class="my-4"/>
+            <!--            <h4 class="text-white text-center">-->
+            <!--            <h5 class="row d-flex justify-content-center align-items-center text-white">-->
+            <button id="show" class="mb-2 text-center btn btn-secondary">Dodaj swój post!</button>
+            <!--            </h5>-->
+
+            <form class="text-white" method="post" action="#" th:action="@{/posty/polityka}" id="form"
+                  style="visibility: hidden;
+                    height: 0vh;
+                    opacity: 0">
+
+                <!-- Title -->
+                <div class="form-outline mb-4 form-white">
+                    <input type="text" id="title" class="form-control" name="title" required="required"/>
+                    <label class="form-label" for="title">Tytuł</label>
+                </div>
+                <!-- Message input -->
+                <div class="form-outline mb-4 form-white">
+                        <textarea class="form-control" id="message" rows="4" name="message"
+                                  required="required"></textarea>
+                    <label class="form-label" for="message">Wiadomość</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-info btn-block mb-4">Wyślij</button>
+            </form>
+        </div>
 
         <div th:each="post: ${posts}">
             <div class="card my-4 bg-secondary text-white">
@@ -51,5 +81,26 @@
         type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
 ></script>
+<script>
+    let clicked = false;
+    document.getElementById("show").onclick = function () {
+        let form = document.getElementById("form");
+        if (!clicked) {
+            form.style.transitionDuration = "1s";
+            form.style.visibility = "visible";
+            form.style.opacity = "1";
+            form.style.height = "230px";
+            clicked = true;
+        } else {
+            form.style.visibility = "hidden";
+            form.style.opacity = "0";
+            form.style.height = "0vh";
+            clicked = false;
+
+
+        }
+    }
+
+</script>
 </body>
 </html>

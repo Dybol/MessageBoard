@@ -30,8 +30,15 @@ public class PostController {
 
 	@GetMapping("/polityka")
 	public String getPolitics(final Model model) {
-		model.addAttribute("posts", postService.findAll());
+		model.addAttribute("posts", postService.findAllOrderByDateDesc());
 		return "posts/politics";
+	}
+
+	@PostMapping("/polityka")
+	public String addPoliticPost(@RequestParam final String title, @RequestParam final String message, final Principal principal) {
+		postService.addPost(title, message, principal.getName(), "polityka");
+
+		return "redirect:/posty/polityka";
 	}
 
 	@GetMapping("/polityka/post")
