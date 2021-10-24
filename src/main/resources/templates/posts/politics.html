@@ -55,7 +55,7 @@
             <div class="card my-4 bg-secondary text-white">
                 <div class="card-header">
                     <a th:href="@{/posty/polityka/post(id=${post.getId()})}">
-                        <strong th:text="${post.getSubject()}">Tytuł posta </strong>
+                        <strong th:text="|${post.getAuthorUsername()}: ${post.getSubject()}|">Tytuł posta </strong>
                     </a>
                 </div>
                 <div class="card-body">
@@ -84,20 +84,18 @@
 <script>
     let clicked = false;
     document.getElementById("show").onclick = function () {
-        let form = document.getElementById("form");
+        let style = document.getElementById("form").style;
         if (!clicked) {
-            form.style.transitionDuration = "1s";
-            form.style.visibility = "visible";
-            form.style.opacity = "1";
-            form.style.height = "230px";
+            style.transitionDuration = "1s";
+            style.visibility = "visible";
+            style.opacity = "1";
+            style.height = "230px";
             clicked = true;
         } else {
-            form.style.visibility = "hidden";
-            form.style.opacity = "0";
-            form.style.height = "0vh";
+            style.visibility = "hidden";
+            style.opacity = "0";
+            style.height = "0vh";
             clicked = false;
-
-
         }
     }
 
