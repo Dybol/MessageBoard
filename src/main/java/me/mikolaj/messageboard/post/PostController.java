@@ -28,7 +28,6 @@ public class PostController {
 
 	@GetMapping("/{category}")
 	public String getPolitics(final Model model, @PathVariable final String category) {
-		System.out.println("kategoria :P" + category);
 		model.addAttribute("category", StringUtils.capitalize(category));
 		model.addAttribute("posts", postService.findAllByCategoryOrdered(category));
 		return "posts/posts";
@@ -52,9 +51,6 @@ public class PostController {
 	@PostMapping("/{category}/post")
 	public String addResponse(@RequestParam final String message, @RequestParam final Long postId, final Principal principal, @PathVariable final String category) {
 		responseService.addResponse(message, postId, principal.getName());
-		System.out.println(principal.getName());
-		System.out.println("Post mess" + message);
-		System.out.println("id post" + postId);
 		return "redirect:/posty/" + category + "/post?id=" + postId;
 	}
 }
