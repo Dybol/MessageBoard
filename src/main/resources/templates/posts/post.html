@@ -59,7 +59,8 @@
         <div sec:authorize="isAuthenticated()">
             <hr class="my-4"/>
             <h4 class="text-white text-center">Dodaj swoją odpowiedź</h4>
-            <form class="text-white" method="post" action="#" th:action="@{/posty/polityka/post}">
+            <form class="text-white" method="post" action="#"
+                  th:action="@{/posty/{category}/post(category=${post.getCategory()})}">
 
                 <input type="hidden" th:value="${post.getId()}" name="postId">
 

@@ -1,13 +1,11 @@
 package me.mikolaj.messageboard.post;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import me.mikolaj.messageboard.post.exception.PostNotFoundException;
 import me.mikolaj.messageboard.response.ResponseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -28,32 +26,35 @@ public class PostController {
 		return "/home";
 	}
 
-	@GetMapping("/polityka")
-	public String getPolitics(final Model model) {
-		model.addAttribute("posts", postService.findAllOrderByDateDesc());
-		return "posts/politics";
+	@GetMapping("/{category}")
+	public String getPolitics(final Model model, @PathVariable final String category) {
+		System.out.println("kategoria :P" + category);
+		model.addAttribute("category", StringUtils.capitalize(category));
+		model.addAttribute("posts", postService.findAllByCategoryOrdered(category));
+		return "posts/posts";
 	}
 
-	@PostMapping("/polityka")
-	public String addPoliticPost(@RequestParam final String title, @RequestParam final String message, final Principal principal) {
-		postService.addPost(title, message, principal.getName(), "polityka");
+	@PostMapping("/{category}")
+	public String addPoliticPost(@RequestParam final String title, @RequestParam final String message,
+								 final Principal principal, @PathVariable final String category) {
+		postService.addPost(title, message, principal.getName(), category.toLowerCase());
 
-		return "redirect:/posty/polityka";
+		return "redirect:/posty/" + category.toLowerCase();
 	}
 
-	@GetMapping("/polityka/post")
-	public String getPost(@RequestParam final Long id, final Model model) {
+	@GetMapping("/{category}/post")
+	public String getPost(@RequestParam final Long id, final Model model, @PathVariable final String category) {
 		model.addAttribute("post", postService.findById(id).orElseThrow(PostNotFoundException::new));
 		model.addAttribute("responses", postService.findAllResponses(id));
 		return "posts/post";
 	}
 
-	@PostMapping("/polityka/post")
-	public String addResponse(@RequestParam final String message, @RequestParam final Long postId, final Principal principal) {
+	@PostMapping("/{category}/post")
+	public String addResponse(@RequestParam final String message, @RequestParam final Long postId, final Principal principal, @PathVariable final String category) {
 		responseService.addResponse(message, postId, principal.getName());
 		System.out.println(principal.getName());
 		System.out.println("Post mess" + message);
 		System.out.println("id post" + postId);
-		return "redirect:/posty/polityka/post?id=" + postId;
+		return "redirect:/posty/" + category + "/post?id=" + postId;
 	}
 }

@@ -44,6 +44,13 @@ public class PostService {
 				.collect(Collectors.toList());
 	}
 
+	public List<PostDto> findAllByCategoryOrdered(final String category) {
+		return postRepository
+				.findAllByCategoryOrdered(category)
+				.stream().map(postMapper::toDto)
+				.collect(Collectors.toList());
+	}
+
 	public Optional<PostDto> findById(final Long id) {
 		return postRepository.findById(id).map(postMapper::toDto);
 	}
