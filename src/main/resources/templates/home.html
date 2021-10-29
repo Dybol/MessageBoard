@@ -18,7 +18,8 @@
 <main>
 
     <div class="container mt-5">
-        <div class="border mg-5">
+        <h3 class="text-white">Porozmawiaj z innymi <i class="far fa-comment text-warning mx-2"></i></h3>
+        <div class="border mg-5" id="chat">
             <div th:each="message: ${messages}">
                 <p th:text="|${message.getAuthorUsername()}: ${message.getMessage()}|" class="mx-3 mt-3 text-white"></p>
             </div>
@@ -55,15 +56,13 @@
             </div>
             <!--Grid row-->
         </form>
+        <p class="text-white" sec:authorize="!isAuthenticated()"><i class="fas fa-exclamation text-danger me-2"></i>Musisz
+            być
+            zalogowany, aby napisać coś od siebie! </p>
     </div>
 </main>
 
-<footer id="footer" style="
-  position: absolute;
-  bottom: 190px;
-  width: 100%;
-  height: 50px;
-}">
+<footer>
     <div th:replace="fragments/footer :: myFooter"></div>
 </footer>
 

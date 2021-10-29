@@ -3,89 +3,91 @@
 
 <body>
 <div th:fragment="myFooter">
-    <footer class="bg-dark text-center text-white">
-        <!-- Grid container -->
-        <div class="container p-3 pb-0" th:if="${#httpServletRequest.requestURI == '/'}">
-            <!-- Section: Form -->
-            <section class="">
-                <form action="/newsletter" method="post" th:action="@{/newsletter}">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>Zapisz się na Newsletter
-                                </strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="email" class="form-control" name="email"/>
-                                <label class="form-label" for="email">Adres email</label>
+    <div th:class="${#httpServletRequest.requestURI == '/'} ? 'footer-home' : 'footer-content'">
+        <footer class="bg-dark text-center text-white">
+            <!-- Grid container -->
+            <div class="container p-3 pb-0" th:if="${#httpServletRequest.requestURI == '/'}">
+                <!-- Section: Form -->
+                <section class="">
+                    <form action="/newsletter" method="post" th:action="@{/newsletter}">
+                        <!--Grid row-->
+                        <div class="row d-flex justify-content-center">
+                            <!--Grid column-->
+                            <div class="col-auto">
+                                <p class="pt-2">
+                                    <strong>Zapisz się na Newsletter
+                                    </strong>
+                                </p>
                             </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-5 col-12">
+                                <!-- Email input -->
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="email" class="form-control" name="email"/>
+                                    <label class="form-label" for="email">Adres email</label>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-auto">
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-outline-light mb-3">
+                                    Zasubskrybuj
+                                </button>
+                            </div>
+                            <!--Grid column-->
                         </div>
-                        <!--Grid column-->
+                        <!--Grid row-->
+                    </form>
+                </section>
+                <!-- Section: Form -->
+            </div>
+            <!-- Grid container -->
 
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-light mb-3">
-                                Zasubskrybuj
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
-        </div>
-        <!-- Grid container -->
+            <!-- Grid container -->
+            <div class="container p-3 pb-0">
+                <!-- Section: Social media -->
+                <section class="mb-3">
+                    <h5>Znajdź nas w mediach społecznościowych</h5>
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    ><i class="fab fa-facebook-f "></i
+                    ></a>
 
-        <!-- Grid container -->
-        <div class="container p-3 pb-0">
-            <!-- Section: Social media -->
-            <section class="mb-3">
-                <h5>Znajdź nas w mediach społecznościowych</h5>
-                <!-- Facebook -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-facebook-f "></i
-                ></a>
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
 
-                <!-- Twitter -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-twitter"></i
-                ></a>
+                    <!-- Youtube -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    ><i class="fab fa-youtube"></i></a>
 
-                <!-- Youtube -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-youtube"></i></a>
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    ><i class="fab fa-instagram"></i
+                    ></a>
 
-                <!-- Instagram -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-instagram"></i
-                ></a>
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
 
-                <!-- Linkedin -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-linkedin-in"></i
-                ></a>
-            </section>
-            <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-
-        <!-- Copyright -->
-        <div class="text-center p-3 bg-dark text-white">
-            © 2021 Copyright:
-            <a class="text-white" href="https://messageboard.com/">MessageBoard.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+            <!-- Copyright -->
+            <div class="text-center p-3 bg-dark text-white">
+                © 2021 Copyright:
+                <a class="text-white" href="https://messageboard.com/">MessageBoard.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </div>
 </div>
 </body>
 </html>
