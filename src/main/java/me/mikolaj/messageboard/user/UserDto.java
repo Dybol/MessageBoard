@@ -1,6 +1,7 @@
 package me.mikolaj.messageboard.user;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDto {
@@ -15,8 +16,8 @@ public class UserDto {
 	private LocalDateTime joinedAt;
 	private boolean enabled;
 	private boolean locked;
-	private List<Long> responsesIds;
-	private List<Long> postsIds;
+	private List<Long> responsesIds = new ArrayList<>();
+	private List<Long> postsIds = new ArrayList<>();
 
 	public Long getId() {
 		return id;

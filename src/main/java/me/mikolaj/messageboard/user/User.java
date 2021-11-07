@@ -167,4 +167,8 @@ public class User {
 	public void setRoles(final Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public void addRole(final Role role) {
+		roles.add(role);
+	}
 }

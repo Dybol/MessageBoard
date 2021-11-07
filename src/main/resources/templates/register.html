@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Zarejestruj się</title>
+    <div th:replace="fragments/header :: myHeader"></div>
+</head>
+<body>
+<header>
+    <div th:replace="fragments/navbar :: myNavbar"></div>
+</header>
+<main>
+
+    <div class="row d-flex justify-content-center align-items-center text-white h-250 mt-5" id="login-form">
+        <div class="col-lg-3 col-md-6 mb-4 h-200 bg-dark mt-5">
+            <div th:if="${error}">
+                <h3 class="text-center" th:text="${error}">Wiadomosc bledu</h3>
+            </div>
+            <form action="#" method="post" th:action="@{/rejestracja}" th:object="${userDto}">
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline form-white">
+                            <input type="text" th:field="*{firstName}" id="name" class="form-control"/>
+                            <label class="form-label" for="name">Imię</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline form-white">
+                            <input type="text" th:field="*{lastName}" id="lastName" class="form-control"/>
+                            <label class="form-label" for="lastName">Nazwisko</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4 form-white">
+                    <input type="text" th:field="*{username}" id="username" class="form-control"/>
+                    <label class="form-label" for="username">Nazwa użytkownika</label>
+                </div>
+                <div class="form-outline mb-4 form-white">
+                    <input type="email" th:field="*{email}" id="email" class="form-control"/>
+                    <label class="form-label" for="email">Adres email</label>
+                </div>
+
+                <div class="form-outline mb-4 form-white">
+                    <input type="password" th:field="*{password}" id="password" class="form-control"/>
+                    <label class="form-label" for="password">Hasło</label>
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input
+                            class="form-check-input me-2"
+                            type="checkbox"
+                            value=""
+                            id="newsletter"
+                            checked
+                    />
+                    <label class="form-check-label" for="newsletter">
+                        Zapisz się na newsletter
+                    </label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-info btn-block mb-4">Zarejestruj się</button>
+            </form>
+        </div>
+    </div>
+</main>
+<footer>
+    <div th:replace="fragments/footer :: myFooter"></div>
+</footer>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</body>
+</html>
