@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--suppress XmlUnusedNamespaceDeclaration -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<head>
+    <title>Admin - Menu główne</title>
+    <div th:replace="fragments/header :: myHeader"></div>
+    <link href="#" th:href="@{/css/admin.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/navbar :: myNavbar"></div>
+</header>
+
+<main>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="admin/fragments/sidebar :: mySidebar"></div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0 text-white">Podsumowanie</h2>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+
+            <div class="container-fluid px-4">
+                <div class="row g-3 my-2">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
+                            <div>
+                                <h3 class="fs-2">720</h3>
+                                <p class="fs-5">Napisanych postów</p>
+                            </div>
+                            <i class="fas fa-laptop fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
+                            <div>
+                                <h3 class="fs-2">3899</h3>
+                                <p class="fs-5">Napisanych odpowiedzi</p>
+                            </div>
+                            <i class="far fa-comment fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
+                            <div>
+                                <h3 class="fs-2">233</h3>
+                                <p class="fs-5">Wszystkich użytkowników</p>
+                            </div>
+                            <i
+                                    class="fas fa-user-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
+                            <div>
+                                <h3 class="fs-2">16</h3>
+                                <p class="fs-5">Nowych użytkowników</p>
+                            </div>
+                            <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3 text-white">Najnowsi użytkownicy</h3>
+                    <div class="col">
+                        <table class="table bg-dark rounded shadow-sm text-white">
+                            <thead>
+                            <tr>
+                                <th scope="col" width="50">#</th>
+                                <th scope="col">Imię</th>
+                                <th scope="col">Nazwisko</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>test@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Test2</td>
+                                <td>Test2</td>
+                                <td>test2@gmail.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
+
+</main>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</body>
+</html>

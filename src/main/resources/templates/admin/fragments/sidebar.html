@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div th:fragment="mySidebar">
+    <div class="bg-dark" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+            Messageboard
+        </div>
+        <div class="list-group list-group-flush my-3">
+            <a href="#" th:href="@{/admin}"
+               class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                    class="fas fa-chart-line me-2"></i>Podsumowanie</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

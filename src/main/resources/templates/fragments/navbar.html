@@ -83,6 +83,9 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuLink"
                     >
+                        <li sec:authorize="hasAuthority('ADMIN')">
+                            <a class="dropdown-item" href="#" th:href="@{/admin}">Panel admina</a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="#">Mój profil</a>
                         </li>
