@@ -37,6 +37,14 @@ public class UserService {
 				.collect(Collectors.toList());
 	}
 
+	public List<UserDto> findAllNewUsers() {
+		final List<UserDto> users = userRepository.findAllOrderByJoinedAtDesc()
+				.stream().map(userMapper::toDto)
+				.collect(Collectors.toList());
+		users.removeIf(userDto -> userDto.getJoinedAt() == null || userDto.getJoinedAt().plusDays(5).isBefore(LocalDateTime.now()));
+		return users;
+	}
+
 	public String signUpUser(final User user) {
 		final boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
 

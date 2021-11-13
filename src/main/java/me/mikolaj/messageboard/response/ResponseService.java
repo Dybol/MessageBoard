@@ -6,6 +6,8 @@ import me.mikolaj.messageboard.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ResponseService {
@@ -28,5 +30,11 @@ public class ResponseService {
 		responseDto.setAuthorUsername(userDto.getUsername());
 		responseDto.setPostId(postId);
 		responseRepository.save(responseMapper.toEntity(responseDto));
+	}
+
+	public List<ResponseDto> findAll() {
+		return responseRepository.findAll()
+				.stream().map(responseMapper::toDto)
+				.collect(Collectors.toList());
 	}
 }

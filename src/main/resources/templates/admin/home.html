@@ -40,7 +40,7 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
                             <div>
-                                <h3 class="fs-2">720</h3>
+                                <h3 class="fs-2" th:text="${postsCount}">720</h3>
                                 <p class="fs-5">Napisanych postów</p>
                             </div>
                             <i class="fas fa-laptop fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -50,7 +50,7 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
                             <div>
-                                <h3 class="fs-2">3899</h3>
+                                <h3 class="fs-2" th:text="${responsesCount}">3899</h3>
                                 <p class="fs-5">Napisanych odpowiedzi</p>
                             </div>
                             <i class="far fa-comment fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -60,7 +60,7 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
                             <div>
-                                <h3 class="fs-2">233</h3>
+                                <h3 class="fs-2" th:text="${usersCount}">233</h3>
                                 <p class="fs-5">Wszystkich użytkowników</p>
                             </div>
                             <i
@@ -71,7 +71,7 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-dark shadow-sm d-flex justify-content-around align-items-center rounded text-white">
                             <div>
-                                <h3 class="fs-2">16</h3>
+                                <h3 class="fs-2" th:text="${newUsersCount}">16</h3>
                                 <p class="fs-5">Nowych użytkowników</p>
                             </div>
                             <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -94,17 +94,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>test@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Test2</td>
-                                <td>Test2</td>
-                                <td>test2@gmail.com</td>
+                            <tr th:each="user, iterator: ${newUsers}">
+                                <th scope="row" th:text="${iterator.count}">1</th>
+                                <td th:text="${user.getFirstName()}">Test</td>
+                                <td th:text="${user.getLastName()}">Test</td>
+                                <td th:text="${user.getEmail()}">test@gmail.com</td>
                             </tr>
                             </tbody>
                         </table>
