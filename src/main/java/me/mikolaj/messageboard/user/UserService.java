@@ -7,8 +7,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -29,6 +31,12 @@ public class UserService {
 		return userRepository.findByEmail(email).map(userMapper::toDto);
 	}
 
+	public List<UserDto> findAll() {
+		return userRepository.findAll()
+				.stream().map(userMapper::toDto)
+				.collect(Collectors.toList());
+	}
+
 	public String signUpUser(final User user) {
 		final boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
 
@@ -39,6 +47,7 @@ public class UserService {
 		final String encodedPassword = passwordEncoder.encode(user.getPassword());
 
 		user.setPassword(encodedPassword);
+		user.setJoinedAt(LocalDateTime.now());
 		userRepository.save(user);
 
 		final String token = UUID.randomUUID().toString();
