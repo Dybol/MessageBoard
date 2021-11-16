@@ -26,9 +26,9 @@ public class RegistrationController {
 	}
 
 	@PostMapping
-	public String register(@ModelAttribute final UserDto userDto, final Model model) {
+	public String register(@ModelAttribute final UserDto userDto, final Model model, @RequestParam(required = false) final String checked) {
 		try {
-			final String token = registrationService.register(userDto);
+			final String token = registrationService.register(userDto, checked);
 		} catch (final EmailNotValidateException exception) {
 			model.addAttribute("error", "Ten email juz istnieje!");
 			return "register";

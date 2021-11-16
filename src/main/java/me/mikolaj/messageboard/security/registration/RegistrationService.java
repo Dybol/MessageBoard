@@ -3,6 +3,7 @@ package me.mikolaj.messageboard.security.registration;
 import me.mikolaj.messageboard.email.EmailProducer;
 import me.mikolaj.messageboard.email.EmailSender;
 import me.mikolaj.messageboard.email.EmailValidator;
+import me.mikolaj.messageboard.newsletter.NewsletterService;
 import me.mikolaj.messageboard.security.registration.exception.EmailNotValidateException;
 import me.mikolaj.messageboard.security.registration.exception.NameNotValidateException;
 import me.mikolaj.messageboard.security.registration.exception.WeakPasswordException;
@@ -32,13 +33,15 @@ public class RegistrationService {
 	private final RoleService roleService;
 	private final ConfirmationTokenService confirmationTokenService;
 	private final EmailSender emailSender;
+	private final NewsletterService newsletterService;
 
 	public RegistrationService(final EmailValidator emailValidator,
 							   final PasswordValidator passwordValidator, final NameValidator nameValidator, final UserService userService,
 							   final UserMapper userMapper,
 							   final RoleService roleService,
 							   final ConfirmationTokenService confirmationTokenService,
-							   @EmailProducer(type = EmailProducer.ProducerType.REGISTRATION) final EmailSender emailSender) {
+							   @EmailProducer(type = EmailProducer.ProducerType.REGISTRATION) final EmailSender emailSender,
+							   final NewsletterService newsletterService) {
 		this.emailValidator = emailValidator;
 		this.passwordValidator = passwordValidator;
 		this.nameValidator = nameValidator;
@@ -47,9 +50,10 @@ public class RegistrationService {
 		this.roleService = roleService;
 		this.confirmationTokenService = confirmationTokenService;
 		this.emailSender = emailSender;
+		this.newsletterService = newsletterService;
 	}
 
-	public String register(final UserDto userDto) {
+	public String register(final UserDto userDto, final String checked) {
 		final boolean isValidEmail = emailValidator.test(userDto.getEmail());
 		final boolean isValidPassword = passwordValidator.test(userDto.getPassword());
 		final boolean isValidFirstName = nameValidator.test(userDto.getFirstName());
@@ -71,6 +75,9 @@ public class RegistrationService {
 		roleService.assignRoleToUser(user, RoleName.USER);
 
 		user.setEnabled(false);
+
+		if (checked != null)
+			newsletterService.addEmailToNewsletter(userDto.getEmail());
 
 		final String token = userService.signUpUser(user);
 		final String link = "http://localhost:8080/rejestracja/aktywuj?token=" + token;
