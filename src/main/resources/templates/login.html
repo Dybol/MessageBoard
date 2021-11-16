@@ -19,7 +19,7 @@
     <div class="row d-flex justify-content-center align-items-center text-white h-250 mt-5" id="login-form">
         <div class="col-lg-3 col-md-6 mb-4 h-200 bg-dark mt-5">
             <div th:if="${message}">
-                <h3 class="text-center" th:text="${message}">Wiadomosc bledu</h3>
+                <h3 class="text-center" th:text="${message}">Wiadomosc</h3>
             </div>
             <form action="login" th:action="@{/login}" method="post">
                 <!-- Email input -->
@@ -52,7 +52,7 @@
 
                     <div class="col">
                         <!-- Simple link -->
-                        <a href="#!" class="text-info">Zapomniałeś hasła?</a>
+                        <a href="#" th:href="@{/resetuj-haslo}" class="text-info">Zapomniałeś hasła?</a>
                     </div>
                 </div>
 

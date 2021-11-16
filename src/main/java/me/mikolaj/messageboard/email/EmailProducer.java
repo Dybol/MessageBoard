@@ -17,6 +17,6 @@ public @interface EmailProducer {
 	ProducerType type();
 
 	public enum ProducerType {
-		REGISTRATION, NEWSLETTER;
+		REGISTRATION, NEWSLETTER, PASSWORD;
 	}
 }
