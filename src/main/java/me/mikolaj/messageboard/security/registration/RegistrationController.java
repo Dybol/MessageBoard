@@ -8,6 +8,7 @@ import me.mikolaj.messageboard.user.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/rejestracja")
@@ -26,7 +27,8 @@ public class RegistrationController {
 	}
 
 	@PostMapping
-	public String register(@ModelAttribute final UserDto userDto, final Model model, @RequestParam(required = false) final String checked) {
+	public String register(@ModelAttribute final UserDto userDto, final Model model, @RequestParam(required = false) final String checked,
+						   final RedirectAttributes attributes) {
 		try {
 			final String token = registrationService.register(userDto, checked);
 		} catch (final EmailNotValidateException exception) {
@@ -42,17 +44,19 @@ public class RegistrationController {
 			model.addAttribute("error", "Wprowadź poprawne imię i nazwisko!");
 			return "register";
 		}
-		return "redirect:/";
+		attributes.addFlashAttribute("message", "Potwierdź swoją rejestrację poprzez kliknięcie w link wysłany w mailu!");
+		return "redirect:/rejestracja";
 	}
 
 	@GetMapping("/aktywuj")
-	public String confirmRegistration(@RequestParam("token") final String token) {
+	public String confirmRegistration(@RequestParam("token") final String token, final RedirectAttributes attributes) {
 		try {
 			registrationService.confirmToken(token);
 		} catch (final IllegalStateException exception) {
 			//TODO: create error page
 			return "error";
 		}
-		return "redirect:/";
+		attributes.addFlashAttribute("message", "Twój email został potwierdzony. Możesz się zalogować");
+		return "redirect:/login";
 	}
 }

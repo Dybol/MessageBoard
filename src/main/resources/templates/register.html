@@ -18,6 +18,9 @@
             <div th:if="${error}">
                 <h3 class="text-center" th:text="${error}">Wiadomosc bledu</h3>
             </div>
+            <div th:if="${message}">
+                <h3 class="text-center" th:text="${message}">Informacja</h3>
+            </div>
             <form action="#" method="post" th:action="@{/rejestracja}" th:object="${userDto}">
                 <div class="row mb-4">
                     <div class="col">
