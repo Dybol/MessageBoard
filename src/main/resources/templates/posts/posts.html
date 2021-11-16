@@ -18,17 +18,14 @@
 <main>
 
     <div class="container">
-
-        <h2 class="mt-5 text-center text-white" th:text="|${category} - najnowsze posty|">X -
-            najnowsze posty
-            <i class="fas fa-landmark text-warning mx-2"></i></h2>
+        <h2 class="mt-5 text-center text-white">
+            <span th:text="|${category} - najnowsze posty|"></span>
+            <i class="far fa-envelope text-warning mx-2"></i>
+        </h2>
 
         <div sec:authorize="isAuthenticated()">
             <hr class="my-4"/>
-            <!--            <h4 class="text-white text-center">-->
-            <!--            <h5 class="row d-flex justify-content-center align-items-center text-white">-->
             <button id="show" class="mb-2 text-center btn btn-secondary">Dodaj swój post!</button>
-            <!--            </h5>-->
 
             <form class="text-white" method="post" action="#"
                   th:action="@{/posty/{category}(category=${category.toLowerCase()})}"
