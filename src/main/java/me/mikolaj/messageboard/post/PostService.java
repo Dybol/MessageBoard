@@ -8,6 +8,7 @@ import me.mikolaj.messageboard.user.UserService;
 import me.mikolaj.messageboard.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +50,17 @@ public class PostService {
 				.findAllByCategoryOrdered(category)
 				.stream().map(postMapper::toDto)
 				.collect(Collectors.toList());
+	}
+
+	public List<PostDto> findAllByUserId(final Long id) {
+		return postRepository.findAllByUserId(id)
+				.stream().map(postMapper::toDto)
+				.collect(Collectors.toList());
+	}
+
+	public List<PostDto> findAllByUserId(final Principal principal) {
+		final UserDto userDto = userService.findByEmail(principal.getName()).orElseThrow(UserNotFoundException::new);
+		return findAllByUserId(userDto.getId());
 	}
 
 	public Optional<PostDto> findById(final Long id) {

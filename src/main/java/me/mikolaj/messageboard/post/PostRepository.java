@@ -15,4 +15,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	@Query("SELECT p FROM Post p WHERE p.category=?1 ORDER BY p.addedDate DESC")
 	public List<Post> findAllByCategoryOrdered(String category);
 
+	@Query(value = "SELECT * FROM Post WHERE user_id=?1 ORDER BY added_date DESC", nativeQuery = true)
+	public List<Post> findAllByUserId(Long id);
+
 }

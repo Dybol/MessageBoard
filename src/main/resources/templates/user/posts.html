@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<head>
+    <title>Twoje posty</title>
+
+    <div th:replace="fragments/header :: myHeader"></div>
+
+</head>
+<body>
+<header>
+    <div th:replace="fragments/navbar :: myNavbar"></div>
+</header>
+
+<main>
+
+    <div class="container" sec:authorize="isAuthenticated()">
+
+        <h2 class="mt-5 text-center text-white">
+            Zobacz swoje najnowsze posty!
+            <i class="fas fa-landmark text-warning mx-2"></i>
+        </h2>
+
+        <div th:each="post: ${posts}">
+            <div class="card my-4 bg-secondary text-white">
+                <div class="card-header">
+                    <a th:href="@{/posty/{category}/post(id=${post.getId()}, category=${post.getCategory().toLowerCase()})}">
+                        <strong th:text="|${post.getCategory()}: ${post.getSubject()}|">Tytuł posta </strong>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p th:text="${post.getShortContent()}">
+                        Krótki opis dadadasd edfw fernu geru gbnertghubertbughbuwr tbhuwrtyh ...
+                    </p>
+                    <footer class="blockquote-footer">
+                        Dodano dnia <i th:text="${#temporals.format(post.getAddedDate(), 'dd-MM-yyyy HH:mm')}">15.10.2021</i>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer id="footer">
+    <div th:replace="fragments/footer :: myFooter"></div>
+</footer>
+
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</body>
+</html>
