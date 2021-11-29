@@ -2,6 +2,7 @@ package me.mikolaj.messageboard.domain.post;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class PostDto {
 
@@ -80,5 +81,20 @@ public class PostDto {
 
 	public void setResponsesIds(final List<Long> responsesIds) {
 		this.responsesIds = responsesIds;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final PostDto postDto = (PostDto) o;
+		return Objects.equals(id, postDto.id) && Objects.equals(subject, postDto.subject)
+				&& Objects.equals(content, postDto.content) && Objects.equals(category, postDto.category)
+				&& Objects.equals(addedDate, postDto.addedDate) && Objects.equals(shortContent, postDto.shortContent);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, subject, content, category, addedDate, shortContent);
 	}
 }

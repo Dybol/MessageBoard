@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class Response {
@@ -77,5 +78,19 @@ public class Response {
 
 	public void setPost(final Post post) {
 		this.post = post;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Response response = (Response) o;
+		return Objects.equals(id, response.id) && Objects.equals(content, response.content)
+				&& Objects.equals(addedDate, response.addedDate);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, content, addedDate);
 	}
 }

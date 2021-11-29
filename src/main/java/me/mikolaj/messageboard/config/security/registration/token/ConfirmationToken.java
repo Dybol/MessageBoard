@@ -4,6 +4,7 @@ import me.mikolaj.messageboard.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class ConfirmationToken {
@@ -96,5 +97,20 @@ public class ConfirmationToken {
 				", expiredAt=" + expiresAt +
 				", confirmedAt=" + confirmedAt +
 				'}';
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final ConfirmationToken that = (ConfirmationToken) o;
+		return Objects.equals(id, that.id) && Objects.equals(token, that.token)
+				&& Objects.equals(createdAt, that.createdAt) && Objects.equals(expiresAt, that.expiresAt)
+				&& Objects.equals(confirmedAt, that.confirmedAt);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, token, createdAt, expiresAt, confirmedAt);
 	}
 }

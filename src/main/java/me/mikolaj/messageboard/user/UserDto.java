@@ -3,6 +3,7 @@ package me.mikolaj.messageboard.user;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserDto {
 
@@ -105,5 +106,21 @@ public class UserDto {
 
 	public void setPostsIds(final List<Long> postsIds) {
 		this.postsIds = postsIds;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final UserDto userDto = (UserDto) o;
+		return enabled == userDto.enabled && locked == userDto.locked && Objects.equals(id, userDto.id)
+				&& Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName)
+				&& Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password)
+				&& Objects.equals(username, userDto.username) && Objects.equals(joinedAt, userDto.joinedAt);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, firstName, lastName, email, password, username, joinedAt, enabled, locked);
 	}
 }

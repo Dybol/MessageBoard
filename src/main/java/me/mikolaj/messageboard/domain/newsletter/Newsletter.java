@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class Newsletter {
@@ -52,5 +53,18 @@ public class Newsletter {
 
 	public void setJoinedAt(final LocalDateTime joinedAt) {
 		this.joinedAt = joinedAt;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Newsletter that = (Newsletter) o;
+		return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(joinedAt, that.joinedAt);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, email, joinedAt);
 	}
 }

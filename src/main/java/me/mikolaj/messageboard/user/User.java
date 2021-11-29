@@ -8,10 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class User {
@@ -170,5 +167,21 @@ public class User {
 
 	public void addRole(final Role role) {
 		roles.add(role);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final User user = (User) o;
+		return enabled == user.enabled && locked == user.locked && Objects.equals(id, user.id)
+				&& Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName)
+				&& Objects.equals(email, user.email) && Objects.equals(password, user.password)
+				&& Objects.equals(username, user.username) && Objects.equals(joinedAt, user.joinedAt);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, firstName, lastName, email, password, username, joinedAt, enabled, locked);
 	}
 }
