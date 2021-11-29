@@ -1,8 +1,8 @@
 package me.mikolaj.messageboard.user;
 
-import me.mikolaj.messageboard.post.Post;
-import me.mikolaj.messageboard.response.Response;
-import me.mikolaj.messageboard.security.role.Role;
+import me.mikolaj.messageboard.config.security.role.Role;
+import me.mikolaj.messageboard.domain.post.Post;
+import me.mikolaj.messageboard.domain.response.Response;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

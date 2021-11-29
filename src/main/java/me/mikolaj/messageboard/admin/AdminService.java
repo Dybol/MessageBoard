@@ -1,7 +1,7 @@
 package me.mikolaj.messageboard.admin;
 
-import me.mikolaj.messageboard.post.PostService;
-import me.mikolaj.messageboard.response.ResponseService;
+import me.mikolaj.messageboard.domain.post.PostService;
+import me.mikolaj.messageboard.domain.response.ResponseService;
 import me.mikolaj.messageboard.user.UserService;
 import org.springframework.stereotype.Service;
 

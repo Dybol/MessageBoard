@@ -1,6 +1,6 @@
 package me.mikolaj.messageboard.admin;
 
-import me.mikolaj.messageboard.newsletter.NewsletterService;
+import me.mikolaj.messageboard.domain.newsletter.NewsletterService;
 import me.mikolaj.messageboard.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

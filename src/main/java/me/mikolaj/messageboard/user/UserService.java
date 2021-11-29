@@ -1,8 +1,8 @@
 package me.mikolaj.messageboard.user;
 
-import me.mikolaj.messageboard.security.registration.exception.UserAlreadyRegisteredException;
-import me.mikolaj.messageboard.security.registration.token.ConfirmationToken;
-import me.mikolaj.messageboard.security.registration.token.ConfirmationTokenService;
+import me.mikolaj.messageboard.config.security.registration.exception.UserAlreadyRegisteredException;
+import me.mikolaj.messageboard.config.security.registration.token.ConfirmationToken;
+import me.mikolaj.messageboard.config.security.registration.token.ConfirmationTokenService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package me.mikolaj.messageboard;
 
-import me.mikolaj.messageboard.chat.ChatService;
+import me.mikolaj.messageboard.domain.chat.ChatService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

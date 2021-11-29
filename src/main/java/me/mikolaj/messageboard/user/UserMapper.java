@@ -1,11 +1,11 @@
 package me.mikolaj.messageboard.user;
 
-import me.mikolaj.messageboard.post.Post;
-import me.mikolaj.messageboard.post.PostRepository;
-import me.mikolaj.messageboard.post.exception.PostNotFoundException;
-import me.mikolaj.messageboard.response.Response;
-import me.mikolaj.messageboard.response.ResponseRepository;
-import me.mikolaj.messageboard.response.exception.ResponseNotFoundException;
+import me.mikolaj.messageboard.domain.post.Post;
+import me.mikolaj.messageboard.domain.post.PostRepository;
+import me.mikolaj.messageboard.domain.post.exception.PostNotFoundException;
+import me.mikolaj.messageboard.domain.response.Response;
+import me.mikolaj.messageboard.domain.response.ResponseRepository;
+import me.mikolaj.messageboard.domain.response.exception.ResponseNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;

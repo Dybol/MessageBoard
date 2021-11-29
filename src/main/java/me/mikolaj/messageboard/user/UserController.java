@@ -1,6 +1,6 @@
 package me.mikolaj.messageboard.user;
 
-import me.mikolaj.messageboard.post.PostService;
+import me.mikolaj.messageboard.domain.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
