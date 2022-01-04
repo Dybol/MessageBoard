@@ -1,12 +1,15 @@
 package me.mikolaj.messageboard.domain.response;
 
+import me.mikolaj.messageboard.domain.post.exception.PostNotFoundException;
 import me.mikolaj.messageboard.user.UserDto;
 import me.mikolaj.messageboard.user.UserService;
 import me.mikolaj.messageboard.user.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +39,20 @@ public class ResponseService {
 		return responseRepository.findAll()
 				.stream().map(responseMapper::toDto)
 				.collect(Collectors.toList());
+	}
+
+	public Optional<ResponseDto> findById(final Long id) {
+		return responseRepository.findById(id)
+				.map(responseMapper::toDto);
+	}
+
+	public void delete(final String responseId, final Principal principal) {
+		if (principal == null)
+			return;
+		final UserDto userDto = userService.findByEmail(principal.getName()).orElseThrow(UserNotFoundException::new);
+		final ResponseDto responseDto = findById(Long.valueOf(responseId)).orElseThrow(PostNotFoundException::new);
+		if (responseDto.getAuthorUsername().equals(userDto.getUsername())) {
+			responseRepository.delete(responseMapper.toEntity(responseDto));
+		}
 	}
 }

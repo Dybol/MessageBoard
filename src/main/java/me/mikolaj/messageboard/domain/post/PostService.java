@@ -1,5 +1,6 @@
 package me.mikolaj.messageboard.domain.post;
 
+import me.mikolaj.messageboard.domain.post.exception.PostNotFoundException;
 import me.mikolaj.messageboard.domain.response.ResponseDto;
 import me.mikolaj.messageboard.domain.response.ResponseMapper;
 import me.mikolaj.messageboard.domain.response.ResponseRepository;
@@ -58,6 +59,10 @@ public class PostService {
 				.collect(Collectors.toList());
 	}
 
+	public String findAuthorEmail(final Long id) {
+		return postRepository.findById(id).orElseThrow(PostNotFoundException::new).getAuthor().getEmail();
+	}
+
 	public List<PostDto> findAllByUserId(final Principal principal) {
 		final UserDto userDto = userService.findByEmail(principal.getName()).orElseThrow(UserNotFoundException::new);
 		return findAllByUserId(userDto.getId());
@@ -82,5 +87,15 @@ public class PostService {
 		post.setAuthorUsername(userDto.getUsername());
 		post.setCategory(category);
 		postRepository.save(postMapper.toEntity(post));
+	}
+
+	public void delete(final String id, final Principal principal) {
+		if (principal == null)
+			return;
+		final UserDto userDto = userService.findByEmail(principal.getName()).orElseThrow(UserNotFoundException::new);
+		final PostDto postDto = findById(Long.valueOf(id)).orElseThrow(PostNotFoundException::new);
+		if (postDto.getAuthorUsername().equals(userDto.getUsername())) {
+			postRepository.delete(postMapper.toEntity(postDto));
+		}
 	}
 }

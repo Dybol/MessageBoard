@@ -12,6 +12,8 @@ public class ResponseDto {
 
 	private String authorUsername;
 
+	private String authorEmail;
+
 	private Long postId;
 
 	public Long getId() {
@@ -44,6 +46,14 @@ public class ResponseDto {
 
 	public void setAuthorUsername(final String authorUsername) {
 		this.authorUsername = authorUsername;
+	}
+
+	public String getAuthorEmail() {
+		return authorEmail;
+	}
+
+	public void setAuthorEmail(final String authorEmail) {
+		this.authorEmail = authorEmail;
 	}
 
 	public Long getPostId() {

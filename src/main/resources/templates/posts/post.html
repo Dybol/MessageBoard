@@ -8,7 +8,15 @@
     <title th:text="${post.getSubject()}">Temat</title>
 
     <div th:replace="fragments/header :: myHeader"></div>
+    <style>
+        a:link {
+            color: yellow;
+        }
 
+        a:visited {
+            color: yellow
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -21,7 +29,16 @@
 
         <div class="card bg-secondary text-white my-5">
             <div class="card-header text-center">
-                <h3 th:text="${post.getSubject()}"></h3>
+                <h3>
+                    <span th:text="${post.getSubject()}"> </span>
+                    <span sec:authorize="isAuthenticated()">
+                        <a th:href="@{/posty/{category}/post/usun/{postId}(category=${post.getCategory()}, postId=${post.getId()})}">
+                        <i th:if="${authorEmail.equals(#authentication.getPrincipal().getUsername())}"
+                           class="far fa-trash-alt">
+                        </i>
+                        </a>
+                    </span>
+                </h3>
             </div>
             <div class="card-body text-justify">
                 <p class="card-text" th:text="${post.getContent()}">
@@ -42,7 +59,22 @@
 
         <div class="card">
             <div class="mb-3" th:each="response: ${responses}">
-                <div class="card-header bg-dark text-white" th:text="${response.getAuthorUsername()}">Imię i nazwisko
+                <div class="card-header bg-dark text-white">
+                    <span th:text="${response.getAuthorUsername()}">
+                    </span>
+                    <!--TODO: Check if response author email equals to the logged user email -->
+                    <!--Poki co to sprawdza tylko autora postu z odpowiedziami, co nie jest do konca pozadane-->
+
+                    <span sec:authorize="isAuthenticated()">
+                        <a th:href="@{/posty/{category}/post/{postId}/usun-odpowiedz/{responseId}(category=${post.getCategory()}, postId=${post.getId()}, responseId=${response.getId()})}">
+                        <i th:if="${response.getAuthorEmail().equals(#authentication.getPrincipal().getUsername())}"
+                           class="far fa-trash-alt">
+                        </i>
+                        </a>
+                    </span>
+                    <!--                    <i sec:authorize="isAuthenticated()" class="far fa-trash-alt"></i>-->
+                    <!--                       th:if="${ #authentication.getPrincipal().getUsername().equals(response.getAuthorUsername())}"-->
+
                 </div>
                 <div class="card-body bg-dark text-white">
                     <p th:text="${response.getContent()}">

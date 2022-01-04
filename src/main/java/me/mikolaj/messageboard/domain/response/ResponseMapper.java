@@ -24,6 +24,7 @@ public class ResponseMapper {
 		responseDto.setAddedDate(response.getAddedDate());
 		responseDto.setPostId(response.getPost().getId());
 		responseDto.setAuthorUsername(response.getAuthor().getUsername());
+		responseDto.setAuthorEmail(response.getAuthor().getEmail());
 
 		return responseDto;
 	}
